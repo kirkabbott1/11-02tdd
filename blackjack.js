@@ -1,5 +1,15 @@
-function getCardImageUrl(card) {
-  var name = card.point;
+var dealerHand = []
+var playerHand = []
+var card = newDeck();
+
+function deal (card, hand) {
+  var newCard = card.pop();
+  hand.push(newCard);
+
+}
+
+function getCardImageUrl(hand) {
+  var name = hand.point;
   if (name  === 11){
     name = 'jack';
   }
@@ -12,7 +22,7 @@ function getCardImageUrl(card) {
   else if(name === 1){
       name = 'ace';
   }
-  return 'images/' + name + '_of_' + card.suit + '.png';
+  return 'images/' + name + '_of_' + hand.suit + '.png';
 }
 
 function calculatePoints(cards) {
@@ -38,5 +48,15 @@ function calculatePoints(cards) {
       }
   }
   return sum;
+}
 
+function newDeck() {
+  var deck = [];
+  for (var i = 1; i <= 13; i++) {
+        deck.push({point: i, suit: "diamonds"});
+        deck.push({point: i, suit: "hearts"});
+        deck.push({point: i, suit: "spades"});
+        deck.push({point: i, suit: "clubs"});
+  }
+  return deck;
 }
