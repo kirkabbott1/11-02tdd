@@ -1,0 +1,32 @@
+#table {
+  background: lightgreen;
+  margin: auto;
+  width: 60%;
+  text-align: center;
+}
+#messages {
+  text-align: center;
+}
+label {
+  font-size: 4em;
+}
+.buttons {
+  width: 300px;
+  margin: auto;
+  text-align: center;
+}
+button {
+  height: 50px;
+  width: 60px;
+}
+#dealer-hand, #player-hand{
+  text-align: center;
+  height: 120px;
+  width: 90%;
+  background-color: rgba(255,255,255,.5);
+}
+img {
+  height: 100px;
+  float: left;
+  margin-left: 3%;
+}
