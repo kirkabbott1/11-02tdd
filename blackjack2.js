@@ -5,33 +5,24 @@ var card = newDeck();
 $(document).ready(function() {
   $('#deal-button').click(function() {
     deal(card, playerHand)
-    deal(card, dealerHand)
-    deal(card, playerHand)
-    deal(card, dealerHand)
-    dealt = true;
-    $('#deal-button').prop('disabled', true);
-    $('#dealer-points').text(calculatePoints(dealerHand));
-
   });
   $('#hit-button').click(function() {
-    deal(card, playerHand);
-    $('#player-points').text(calculatePoints(playerHand));
+    $('#player-hand').append(imageUrl);
   })
 });
-var dealt = false;
+
 function deal (card, hand) {
   var newCard = card.pop();
   hand.push(newCard);
   var imageUrl = getCardImageUrl(newCard);
   var cardUrl = '<img src="' + imageUrl + '"/>';
-    if (hand === dealerHand) {
-      $('#dealer-hand').append(cardUrl);
-
-    }
-      else{
-        $('#player-hand').append(cardUrl);
+  if (hand === dealerHand) {
+    $('#dealer-hand').append(cardUrl);
   }
+    else
+      $('#player-hand').append(cardUrl);
 }
+// deal(card, dealerHand);
 
 function getCardImageUrl(hand) {
   var name = hand.point;
@@ -50,14 +41,14 @@ function getCardImageUrl(hand) {
   return 'assets/' + name + '_of_' + hand.suit + '.png';
 }
 
-function calculatePoints(card) {
-  card.sort(function(a,b) {
+function calculatePoints(cards) {
+  cards.sort(function(a,b) {
       return b.point - a.point;
   });
 
   var sum = 0;
-  for(var i=0;i< card.length; i++){
-      if(card[i].point == 1){
+  for(var i=0;i< cards.length; i++){
+      if(cards[i].point == 1){
           if(sum > 10){
               sum += 1;
           }
@@ -65,19 +56,14 @@ function calculatePoints(card) {
               sum += 11;
           }
       }
-      if(card[i].point >=2 && card[i].point <= 10){
-          sum += card[i].point;
-          }
-      if(card[i].point ==11 || card[i].point == 12 || card[i].point == 13){
-          sum += 10;
-        }
+      if(cards[i].point >=2 && cards[i].point <= 10){
+          sum += cards[i].point;
       }
-  if (sum >= 21) {
-    $('#player-points').text('you busted, fuck you');
-
-    }
+      if(cards[i].point ==11 || cards[i].point == 12 || cards[i].point == 13){
+          sum += 10;
+      }
+  }
   return sum;
-
 }
 
 function newDeck() {
