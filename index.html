@@ -7,15 +7,7 @@
     <script src="blackjack.js"></script>
     <link rel="stylesheet" href="style.css" media="screen" title="no title">
     <script>
-      $(document).ready(function() {
-        $('#deal-button').click(function() {
-          $('.hand').append('<img src="assets/queen_of_diamonds.png">');
-          $('.hand').append('<img src="assets/queen_of_diamonds.png">');
-        });
-        $('#hit-button').click(function() {
-          $('#player-hand').append('<img src="assets/jack_of_diamonds.png">');
-        })
-      });
+
 
     </script>
   </head>
@@ -25,8 +17,6 @@
       <label>Dealer: </label>
       <label id="dealer-points" class="points"></label>
       <div id="dealer-hand" class="hand">
-        <!-- <img src="assets/king_of_diamonds.png" alt="" />
-        <img src="assets/queen_of_diamonds.png" alt="" /> -->
       </div>
       <label>Player: </label>
       <label id="player-points" class="points"></label>

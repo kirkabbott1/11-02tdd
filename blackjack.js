@@ -2,11 +2,27 @@ var dealerHand = []
 var playerHand = []
 var card = newDeck();
 
+$(document).ready(function() {
+  $('#deal-button').click(function() {
+    deal(card, playerHand)
+  });
+  $('#hit-button').click(function() {
+    $('#player-hand').append(imageUrl);
+  })
+});
+
 function deal (card, hand) {
   var newCard = card.pop();
   hand.push(newCard);
-
+  var imageUrl = getCardImageUrl(newCard);
+  var cardUrl = '<img src="' + imageUrl + '"/>';
+  if (hand === dealerHand) {
+    $('#dealer-hand').append(cardUrl);
+  }
+    else
+      $('#player-hand').append(cardUrl);
 }
+// deal(card, dealerHand);
 
 function getCardImageUrl(hand) {
   var name = hand.point;
@@ -22,7 +38,7 @@ function getCardImageUrl(hand) {
   else if(name === 1){
       name = 'ace';
   }
-  return 'images/' + name + '_of_' + hand.suit + '.png';
+  return 'assets/' + name + '_of_' + hand.suit + '.png';
 }
 
 function calculatePoints(cards) {
