@@ -11,19 +11,22 @@ label {
   font-size: 4em;
 }
 .buttons {
-  width: 300px;
   margin: auto;
   text-align: center;
+  display: inline-block;
+
 }
 button {
-  height: 50px;
-  width: 60px;
+  height: 60px;
+  width: 70px;
+  float: left;
 }
 #dealer-hand, #player-hand{
   text-align: center;
   height: 120px;
   width: 90%;
   background-color: rgba(255,255,255,.5);
+  margin: auto;
 }
 img {
   height: 100px;
