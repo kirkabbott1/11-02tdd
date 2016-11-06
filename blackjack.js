@@ -22,13 +22,13 @@ Hand.prototype.getPoints = function() {
     };
     return currSum + add;
   }, 0)
-    if (sum > 21) {
-      $('#hit-button').prop('disabled', true);
-    }
-    if (sum === 21) {
-      $('#hit-button').prop('disabled', true);
-      $('#stand-button').prop('disabled', true);
-    }
+    // if (sum > 21) {
+    //   $('#hit-button').prop('disabled', true);
+    // }
+    // if (sum === 21) {
+    //   $('#hit-button').prop('disabled', true);
+    //   $('#stand-button').prop('disabled', true);
+    // }
   return sum;
 };
 
@@ -131,7 +131,7 @@ function deal (hand) {
 
   hand.addCard(newCard);
   var imageUrl = newCard.getImageUrl();
-  var cardUrl = '<img src="' + imageUrl + '"/>';
+  var cardUrl = '<img class="card" src="' + imageUrl + '"/>';
     if (hand === dealerHand) {
       $('#dealer-hand').append(cardUrl);
       $('#dealer-points').text(dealerHand.getPoints());
@@ -182,7 +182,7 @@ function checkWin() {
     console.log(dealerHand.getPoints());
   }
   else if (playerHand.getPoints() > dealerHand.getPoints()) {
-    $('#messages').text('You win you sexy beast')
+    $('#messages').text('You win')
   }
 
   console.log(dealerHand.getPoints());
@@ -204,5 +204,10 @@ function playAgain() {
   $('#player-hand').empty();
   $('#dealer-hand').empty();
   $('#messages').empty();
+  $('#dealer-points').empty();
+  $('#player-points').empty();
+  dealerHand.cardArray = [];
+  playerHand.cardArray = [];
+  $('#deal-button').prop('disabled', false)
 
 };

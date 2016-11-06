@@ -7,6 +7,9 @@
 #messages {
   text-align: center;
 }
+.card {
+  margin-top: 3%;
+}
 label {
   font-size: 4em;
 }
