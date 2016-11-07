@@ -111,11 +111,15 @@ $(document).ready(function() {
     $('#hit-button').prop('disabled', false);
     // $('#dealer-points').text(dealerHand.getPoints());
     // $('#player-points').text(playerHand.getPoints());
-    if (dealerHand.getPoints() === 21) {
+    if (dealerHand.getPoints() === 21 && playerHand.getPoints() === 21) {
+      $('#messages').text('BlackJack Push');
+      $('#hit-button').prop('disabled', true)
+    } else if (dealerHand.getPoints() === 21) {
       $('#messages').text('Dealer BlackJack');
-    }
-    if (playerHand.getPoints() === 21) {
-      $('#messages').text('BlackJack');
+      $('#hit-button').prop('disabled', true)
+    } else if (playerHand.getPoints() === 21) {
+      $('#messages').text('You got BlackJack, click stand');
+      $('#hit-button').prop('disabled', true)
     }
   });
   $('#hit-button').click(function() {
@@ -124,7 +128,6 @@ $(document).ready(function() {
 
     console.log("Player points: " + playerHand.getPoints());
     if (playerHand.getPoints() > 21) {
-      console.log("I am greater than 21!!");
       $('#messages').text('You busted!');
       $('#hit-button').prop('disabled', true);
       $('#stand-button').prop('disabled', true);
@@ -155,7 +158,7 @@ function deal(hand, hole) {
       var text = "";
       if (hole) {
         cardUrl = '<img id="holeCard" class="card" src="assets/backCard.png"/>';
-        text = '???';
+        text = '';
       } else {
         text = dealerHand.getPoints();
       }

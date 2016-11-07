@@ -1,7 +1,19 @@
 body {
   font-family: sans-serif;
+  background-image: url('assets/carpet.jpg');
+  background-size: 100%;"
 }
-
+.title {
+  text-align: center;
+  color: #F8F8FF;
+}
+.clear:before, .clear:after {
+  content: "";
+  display: table;
+}
+.clear:after {
+  clear: both;
+}
 #table {
   background-image: url("assets/felt.png");
   margin: auto;
@@ -17,7 +29,8 @@ body {
 }
 #messages {
   text-align: center;
-  color: #fff;
+  color: #F8F8FF;
+  margin: 0;
 }
 .points {
   position: absolute;
@@ -28,7 +41,7 @@ body {
   margin-top: 3%;
 }
 label {
-  color: antiquewhite;
+  color: #F8F8FF;
   font-size: 1.5em;
 }
 .buttons {
@@ -39,9 +52,24 @@ label {
 }
 button {
   height: 40px;
-  width: 50px;
+  margin-right: 5px;
+  border-radius: 5px;
+  width: 55px;
+  font-size: .75em;
   float: left;
+  cursor: pointer;
+  transition: 0.3s;
 }
+button:hover:enabled {
+  background-color: #111;
+  color: #fff;
+  border-color: #000;
+  transition: 0.3s;
+}
+button:focus {
+  outline: none;
+}
+
 #dealer-hand, #player-hand{
   text-align: center;
   height: 120px;
@@ -52,4 +80,61 @@ img {
   height: 65px;
   float: left;
   margin-left: 2%;
+}
+.hand img {
+  margin: 2% 2% 2% 0;
+}
+.cactus {
+  float: right;
+  position: absolute;
+  right: 30px;
+  top: 146px;
+}
+
+/*************************
+      MEDIA QUERIES
+*************************/
+@media screen and (min-width: 450px) {
+  .hand img {
+    height: 83px;
+  }
+}
+@media screen and (min-width: 575px) {
+  .hand img {
+    height: 100px;
+    float: left;
+    /*margin: 2% 2% 2% 0;*/
+  }
+  label {
+    font-size: 2em;
+  }
+  #dealer-hand, #player-hand{
+    margin: auto;
+    margin-bottom: 15px;
+  }
+  .message-div {
+    height: 60px;
+    line-height: 60px;
+  }
+  #messages {
+    font-size: 1.5em;
+  }
+  button {
+    font-size: 1.1em;
+    width: 85px;
+    height: 66px;
+    background-color: ;
+  }
+  #table {
+    border-radius: 68px;
+    border: 30px solid #111;
+  }
+  .cactus-div {
+    position: relative;
+  }
+  .cactus {
+    height: 120px;
+    top: -50px;
+    right: 20px;
+  }
 }
