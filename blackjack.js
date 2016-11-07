@@ -1,27 +1,39 @@
 
+
+// create Hand Constructor
+
 function Hand() {
   this.cardArray = []
-  this.points = 0
 };
 
-Hand.prototype.addCard = function(card) {
-  this.cardArray.push({point: card.point, suit: card.suit});
-};
+ Hand.prototype.getPoints = function() {
+   var length = this.cardArray.length;
+   var counter = 0;
+   var count_1 = false;
 
-Hand.prototype.getPoints = function() {
-  var sum = this.cardArray.reduce(function (currSum, addCurrVal) {
-    var add = addCurrVal.point;
-    if (add > 10) {
-      add = 10;
-    } else if (add === 1) {
-      if (add >= 10){
-        add = 1;
-      } else {
-        add += 10;
-      }
-    };
-    return currSum + add;
-  }, 0)
+   var points = this.cardArray.reduce(function(totalPoints, card) {
+     if (card.point > 10) {
+       card.point = 10;
+     }
+     counter++;
+     totalPoints += card.point;
+     if (card.point === 1) {
+       count_1 = true;
+     }
+     if (counter === length) {
+       if (totalPoints <= 11 && count_1) {
+         totalPoints += 10;
+       }
+     }
+     console.log("total points: " + totalPoints);
+     return totalPoints;
+   }, 0);
+   return points;
+ }
+
+ Hand.prototype.addCard = function(newCard) {
+   this.cardArray.push({point: newCard.point, suit: newCard.suit});
+ };
     // if (sum > 21) {
     //   $('#hit-button').prop('disabled', true);
     // }
@@ -29,8 +41,7 @@ Hand.prototype.getPoints = function() {
     //   $('#hit-button').prop('disabled', true);
     //   $('#stand-button').prop('disabled', true);
     // }
-  return sum;
-};
+
 
 function Deck() {
   this.deck = [];
@@ -84,22 +95,27 @@ var playerHand = new Hand();
 
 
 $(document).ready(function() {
+
   $('#stand-button').prop('disabled', true);
   $('#hit-button').prop('disabled', true);
   $('#deal-button').click(function() {
     myDeck.newDeckGenerator();
     myDeck.shuffle();
+    console.log(myDeck.deck.length)
     deal(playerHand)
     deal(dealerHand)
     deal(playerHand)
-    deal(dealerHand)
+    deal(dealerHand, 'hole')
     $('#deal-button').prop('disabled', true);
     $('#stand-button').prop('disabled', false);
     $('#hit-button').prop('disabled', false);
-    $('#dealer-points').text(dealerHand.getPoints());
-    $('#player-points').text(playerHand.getPoints());
+    // $('#dealer-points').text(dealerHand.getPoints());
+    // $('#player-points').text(playerHand.getPoints());
     if (dealerHand.getPoints() === 21) {
       $('#messages').text('Dealer BlackJack');
+    }
+    if (playerHand.getPoints() === 21) {
+      $('#messages').text('BlackJack');
     }
   });
   $('#hit-button').click(function() {
@@ -125,16 +141,26 @@ $(document).ready(function() {
   })
 });
 
-function deal (hand) {
+function deal(hand, hole) {
 
   var newCard = myDeck.draw();
+
+  console.log("DRAW NEW CARD: ");
+  console.log(newCard);
 
   hand.addCard(newCard);
   var imageUrl = newCard.getImageUrl();
   var cardUrl = '<img class="card" src="' + imageUrl + '"/>';
     if (hand === dealerHand) {
+      var text = "";
+      if (hole) {
+        cardUrl = '<img id="holeCard" class="card" src="assets/backCard.png"/>';
+        text = '???';
+      } else {
+        text = dealerHand.getPoints();
+      }
       $('#dealer-hand').append(cardUrl);
-      $('#dealer-points').text(dealerHand.getPoints());
+      $('#dealer-points').text(text);
     }
       else{
         $('#player-hand').append(cardUrl);
@@ -170,25 +196,37 @@ function checkWin() {
   console.log("PLAYER POINTS: " + playerHand.getPoints());
 
   if (playerHand.getPoints() === dealerHand.getPoints()) {
-    $('#messages').text("It's a push!");
-  } else if (playerHand.getPoints() > 21 || dealerHand.getPoints() ===21) {
-    $('#messages').text('you lost');
-  }
-  else if (playerHand.getPoints() === 21) {
-    $('#messages').text('BLACKJACK!!!!');
+    $('#messages').text("It's a push :/");
   }
   else if (dealerHand.getPoints() > 21) {
-    $('#messages').text('Dealer busts');
+    $('#messages').text('Dealer busts :)');
     console.log(dealerHand.getPoints());
   }
+  else if (playerHand.getPoints() > 21 || dealerHand.getPoints() === 21 || (dealerHand.getPoints() > playerHand.getPoints())) {
+    $('#messages').text('you lost :(');
+  }
+  else if (playerHand.getPoints() === 21) {
+    $('#messages').text('You Win with 21! :)');
+  }
+
   else if (playerHand.getPoints() > dealerHand.getPoints()) {
-    $('#messages').text('You win')
+    $('#messages').text('You win :)')
   }
 
   console.log(dealerHand.getPoints());
 };
 
 function stand() {
+
+  // remove back of the hole cards
+  $("#holeCard").remove();
+
+  // create a new instance of card
+  var card = new Card(dealerHand.cardArray[1].point, dealerHand.cardArray[1].suit);
+
+  // add the hole card facing up
+  $("#dealer-hand").append('<img class="card" src="' + card.getImageUrl() + '"/>');
+
   console.log("enters stand");
   if (dealerHand.getPoints() < 17) {
     while (dealerHand.getPoints() < 17) {
@@ -197,10 +235,12 @@ function stand() {
   }
   checkWin();
   $('#stand-button').prop('disabled', true);
+  $('#hit-button').prop('disabled', true);
 };
 
 function playAgain() {
-  console.log("playagain");
+  myDeck.deck = [];
+  console.log('Deck length play again:' + myDeck.deck.length);
   $('#player-hand').empty();
   $('#dealer-hand').empty();
   $('#messages').empty();

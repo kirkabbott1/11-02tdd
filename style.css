@@ -1,17 +1,35 @@
+body {
+  font-family: sans-serif;
+}
+
 #table {
-  background: lightgreen;
+  background-image: url("assets/felt.png");
   margin: auto;
-  width: 60%;
+  max-width: 600px;
   text-align: center;
+  border-radius: 40px;
+  border: 10px solid #222;
+}
+.message-div {
+  position: relative;
+  height: 40px;
+  line-height: 40px;
 }
 #messages {
   text-align: center;
+  color: #fff;
+}
+.points {
+  position: absolute;
+  float: right;
+  padding-left: 10px;
 }
 .card {
   margin-top: 3%;
 }
 label {
-  font-size: 4em;
+  color: antiquewhite;
+  font-size: 1.5em;
 }
 .buttons {
   margin: auto;
@@ -20,19 +38,18 @@ label {
 
 }
 button {
-  height: 60px;
-  width: 70px;
+  height: 40px;
+  width: 50px;
   float: left;
 }
 #dealer-hand, #player-hand{
   text-align: center;
   height: 120px;
-  width: 90%;
-  background-color: rgba(255,255,255,.5);
+  width: 95%;
   margin: auto;
 }
 img {
-  height: 100px;
+  height: 65px;
   float: left;
-  margin-left: 3%;
+  margin-left: 2%;
 }
