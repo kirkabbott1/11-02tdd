@@ -12,39 +12,44 @@
     </script>
   </head>
   <body>
-    <h1 class="title">
-      <strong>Cactus BlackJack Tactics Practice</strong>
-    </h1>
-    <div id="table">
-      <div class="inner-table">
-        <div class="table-content">
-          <div class="message-div">
-            <p id="messages">
-            </p>
-          </div>
-          <div class="cactus-div">
-            <img class="cactus clear" src="assets/cactus.png" alt="" />
-          </div>
-          <div class="display-results">
-            <label>Dealer: </label>
-            <label class="points" id="dealer-points" class="points"></label>
-          </div>
-          <div id="dealer-hand" class="clear hand">
-          </div>
-          <div class="display-results">
-            <label>Player: </label>
-            <label class="points" id="player-points" class="points"></label>
-          </div>
-          <div id="player-hand" class="clear hand">
-          </div>
-          <div class="buttons">
-            <button id="deal-button">Deal</button>
-            <button id="hit-button">Hit</button>
-            <button id="stand-button">Stand</button>
-            <button id="Play-Again-button">Play Again?</button>
-          </div>
-        </div> <!-- end of table content div  -->
-      </div> <!-- end of inner table  -->
-    </div> <!-- end of table  -->
+    <div class="container">
+
+      <h2 class="title">
+        <div class="titleWithin">
+          Cactus BlackJack Tactics Practice
+        </div>
+      </h1>
+      <div id="table">
+        <div class="inner-table">
+          <div class="table-content">
+            <div class="message-div">
+              <p id="messages">
+              </p>
+            </div>
+            <div class="cactus-div">
+              <img class="cactus clear" src="assets/cactus.png" alt="" />
+            </div>
+            <div class="display-results">
+              <label>Dealer: </label>
+              <label class="points" id="dealer-points" class="points"></label>
+            </div>
+            <div id="dealer-hand" class="clear hand">
+            </div>
+            <div class="display-results">
+              <label>Player: </label>
+              <label class="points" id="player-points" class="points"></label>
+            </div>
+            <div id="player-hand" class="clear hand">
+            </div>
+            <div class="buttons">
+              <button id="deal-button">Deal</button>
+              <button id="hit-button">Hit</button>
+              <button id="stand-button">Stand</button>
+              <button id="Play-Again-button" disabled>Play Again</button>
+            </div>
+          </div> <!-- end of table content div  -->
+        </div> <!-- end of inner table  -->
+      </div> <!-- end of table  -->
+    </div> <!-- end of container -->
   </body>
 </html>

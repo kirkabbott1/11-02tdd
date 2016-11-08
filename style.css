@@ -1,11 +1,23 @@
+html, body {
+  height: 100%;
+}
+
 body {
+  margin: 0;
   font-family: sans-serif;
   background-image: url('assets/carpet.jpg');
-  background-size: 100%;"
+  background-size: cover;
 }
 .title {
   text-align: center;
   color: #F8F8FF;
+}
+.titleWithin {
+  display: inline-block;
+  background-color: #111;
+  padding: 12px;
+  border-radius: 17px;
+  margin: 10px;
 }
 .clear:before, .clear:after {
   content: "";
@@ -59,9 +71,10 @@ button {
   float: left;
   cursor: pointer;
   transition: 0.3s;
+  font-weight: 700;
 }
 button:hover:enabled {
-  background-color: #111;
+  background-color: #222;
   color: #fff;
   border-color: #000;
   transition: 0.3s;

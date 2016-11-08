@@ -98,7 +98,9 @@ $(document).ready(function() {
 
   $('#stand-button').prop('disabled', true);
   $('#hit-button').prop('disabled', true);
+  // $('#Play-Again-button').prop('disabled', false);
   $('#deal-button').click(function() {
+    $('#Play-Again-button').prop('disabled', true);
     myDeck.newDeckGenerator();
     myDeck.shuffle();
     console.log(myDeck.deck.length)
@@ -114,12 +116,15 @@ $(document).ready(function() {
     if (dealerHand.getPoints() === 21 && playerHand.getPoints() === 21) {
       $('#messages').text('BlackJack Push');
       $('#hit-button').prop('disabled', true)
+      showDealer();
     } else if (dealerHand.getPoints() === 21) {
       $('#messages').text('Dealer BlackJack');
       $('#hit-button').prop('disabled', true)
+      showDealer();
     } else if (playerHand.getPoints() === 21) {
       $('#messages').text('You got BlackJack, click stand');
       $('#hit-button').prop('disabled', true)
+      showDealer();
     }
   });
   $('#hit-button').click(function() {
@@ -194,9 +199,9 @@ Card.prototype.getImageUrl = function() {
 };
 
 function checkWin() {
-
-  console.log("DEALER POINTS: " + dealerHand.getPoints());
-  console.log("PLAYER POINTS: " + playerHand.getPoints());
+  //
+  // console.log("DEALER POINTS: " + dealerHand.getPoints());
+  // console.log("PLAYER POINTS: " + playerHand.getPoints());
 
   if (playerHand.getPoints() === dealerHand.getPoints()) {
     $('#messages').text("It's a push :/");
@@ -215,13 +220,10 @@ function checkWin() {
   else if (playerHand.getPoints() > dealerHand.getPoints()) {
     $('#messages').text('You win :)')
   }
-
+  $('#Play-Again-button').prop('disabled', false);
   console.log(dealerHand.getPoints());
 };
-
-function stand() {
-
-  // remove back of the hole cards
+function showDealer() {
   $("#holeCard").remove();
 
   // create a new instance of card
@@ -229,6 +231,9 @@ function stand() {
 
   // add the hole card facing up
   $("#dealer-hand").append('<img class="card" src="' + card.getImageUrl() + '"/>');
+}
+function stand() {
+  showDealer();
 
   console.log("enters stand");
   if (dealerHand.getPoints() < 17) {
@@ -252,5 +257,4 @@ function playAgain() {
   dealerHand.cardArray = [];
   playerHand.cardArray = [];
   $('#deal-button').prop('disabled', false)
-
 };
