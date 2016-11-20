@@ -136,6 +136,7 @@ $(document).ready(function() {
       $('#messages').text('You busted!');
       $('#hit-button').prop('disabled', true);
       $('#stand-button').prop('disabled', true);
+      $('#Play-Again-button').prop('disabled', false);
     }
 
   });
