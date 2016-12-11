@@ -3,8 +3,8 @@
 // create Hand Constructor
 
 function Hand() {
-  this.cardArray = []
-};
+  this.cardArray = [];
+}
 
  Hand.prototype.getPoints = function() {
    var length = this.cardArray.length;
@@ -29,7 +29,7 @@ function Hand() {
      return totalPoints;
    }, 0);
    return points;
- }
+ };
 
  Hand.prototype.addCard = function(newCard) {
    this.cardArray.push({point: newCard.point, suit: newCard.suit});
@@ -45,7 +45,7 @@ function Hand() {
 
 function Deck() {
   this.deck = [];
-};
+}
 
 Deck.prototype.newDeckGenerator = function() {
   for (var i = 1; i <= 13; i++) {
@@ -57,7 +57,7 @@ Deck.prototype.newDeckGenerator = function() {
   console.log("NEW DECK OF CARDS BEING GENERATED: ");
   console.log(this.deck);
   console.log("Length of newly gnerated deck: " + this.deck.length);
-}
+};
 
 Deck.prototype.draw = function() {
   console.log("current deck before being drawing a card: ");
@@ -67,7 +67,7 @@ Deck.prototype.draw = function() {
   console.log("Drawn card: ");
   console.log(newCard);
   return newCard;
-}
+};
 
 Deck.prototype.shuffle = function() {
   var i = 0, j = 0, temp = null;
@@ -78,7 +78,7 @@ Deck.prototype.shuffle = function() {
     this.deck[i] = this.deck[j];
     this.deck[j] = temp;
   }
-}
+};
 // Deck.prototype.shuffle = function() {
 //   for (var i = this.deck.length -1; i > 0; i--) {
 //     var index = Math.floor(Math.random() * i +1);
@@ -103,11 +103,11 @@ $(document).ready(function() {
     $('#Play-Again-button').prop('disabled', true);
     myDeck.newDeckGenerator();
     myDeck.shuffle();
-    console.log(myDeck.deck.length)
-    deal(playerHand)
-    deal(dealerHand)
-    deal(playerHand)
-    deal(dealerHand, 'hole')
+    console.log(myDeck.deck.length);
+    deal(playerHand);
+    deal(dealerHand);
+    deal(playerHand);
+    deal(dealerHand, 'hole');
     $('#deal-button').prop('disabled', true);
     $('#stand-button').prop('disabled', false);
     $('#hit-button').prop('disabled', false);
@@ -115,15 +115,17 @@ $(document).ready(function() {
     // $('#player-points').text(playerHand.getPoints());
     if (dealerHand.getPoints() === 21 && playerHand.getPoints() === 21) {
       $('#messages').text('BlackJack Push');
-      $('#hit-button').prop('disabled', true)
+      $('#hit-button').prop('disabled', true);
       showDealer();
     } else if (dealerHand.getPoints() === 21) {
       $('#messages').text('Dealer BlackJack');
-      $('#hit-button').prop('disabled', true)
+      $('#hit-button').prop('disabled', true);
       showDealer();
+      $('#stand-button').prop('disabled', true);
+      $('#Play-Again-button').prop('disabled', false);
     } else if (playerHand.getPoints() === 21) {
       $('#messages').text('You got BlackJack, click stand');
-      $('#hit-button').prop('disabled', true)
+      $('#hit-button').prop('disabled', true);
       showDealer();
     }
   });
@@ -144,10 +146,10 @@ $(document).ready(function() {
     stand();
     $('#hit-button').prop('disabled', true);
     $('#dealer-points').text(dealerHand.getPoints());
-  })
+  });
   $('#Play-Again-button').click(function() {
     playAgain();
-  })
+  });
 });
 
 function deal(hand, hole) {
@@ -175,12 +177,12 @@ function deal(hand, hole) {
         $('#player-hand').append(cardUrl);
         $('#player-points').text(playerHand.getPoints());
   }
-};
+}
 
 function Card(point, suit) {
   this.point = point;
   this.suit = suit;
-};
+}
 
 Card.prototype.getImageUrl = function() {
   var name = this.point;
@@ -219,11 +221,11 @@ function checkWin() {
   }
 
   else if (playerHand.getPoints() > dealerHand.getPoints()) {
-    $('#messages').text('You win :)')
+    $('#messages').text('You win :)');
   }
   $('#Play-Again-button').prop('disabled', false);
   console.log(dealerHand.getPoints());
-};
+}
 function showDealer() {
   $("#holeCard").remove();
 
@@ -245,7 +247,7 @@ function stand() {
   checkWin();
   $('#stand-button').prop('disabled', true);
   $('#hit-button').prop('disabled', true);
-};
+}
 
 function playAgain() {
   myDeck.deck = [];
@@ -257,5 +259,5 @@ function playAgain() {
   $('#player-points').empty();
   dealerHand.cardArray = [];
   playerHand.cardArray = [];
-  $('#deal-button').prop('disabled', false)
-};
+  $('#deal-button').prop('disabled', false);
+}
