@@ -79,15 +79,6 @@ Deck.prototype.shuffle = function() {
     this.deck[j] = temp;
   }
 };
-// Deck.prototype.shuffle = function() {
-//   for (var i = this.deck.length -1; i > 0; i--) {
-//     var index = Math.floor(Math.random() * i +1);
-//     var temp = this.deck[i];
-//     this.deck[i] = this.deck[index];
-//     this.deck[index] = temp;
-//   }
-//   return this.deck;
-// }
 
 var myDeck = new Deck();
 var dealerHand = new Hand();
@@ -202,9 +193,6 @@ Card.prototype.getImageUrl = function() {
 };
 
 function checkWin() {
-  //
-  // console.log("DEALER POINTS: " + dealerHand.getPoints());
-  // console.log("PLAYER POINTS: " + playerHand.getPoints());
 
   if (playerHand.getPoints() === dealerHand.getPoints()) {
     $('#messages').text("It's a push :/");
@@ -226,6 +214,7 @@ function checkWin() {
   $('#Play-Again-button').prop('disabled', false);
   console.log(dealerHand.getPoints());
 }
+
 function showDealer() {
   $("#holeCard").remove();
 
